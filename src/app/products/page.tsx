@@ -2,8 +2,6 @@ import Navbar from '@/components/Navbar'
 import ProductCard from '@/components/ProductCard'
 import { createClient } from '@/lib/supabase/server'
 
-export const dynamic = 'force-dynamic'
-
 export default async function ProductsPage() {
   const supabase = await createClient()
 
