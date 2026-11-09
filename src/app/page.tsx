@@ -45,7 +45,7 @@ export default function Home() {
 
       <footer className="bg-white border-t border-gray-200 py-6 text-center">
         <p className="text-gray-500 text-sm">
-          © {new Date().getFullYear()} TALVEXA. All rights reserved.
+          © 2025 TALVEXA. All rights reserved.
         </p>
       </footer>
     </div>
