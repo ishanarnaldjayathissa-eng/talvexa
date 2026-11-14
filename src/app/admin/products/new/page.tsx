@@ -51,7 +51,7 @@ export default function AddProductPage() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-8 font-sans flex justify-center items-center">
-      <div className="w-full max-w-2xl bg-white p-8 rounded-lg shadow-md">
+      <div className="w-full max-w-2xl bg-white p-8 rounded-lg shadow-md border-t-4 border-gold">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-navy">Add New Product</h1>
           <Link href="/admin" className="text-sm text-blue-600 hover:underline">Back to Admin</Link>
@@ -63,14 +63,23 @@ export default function AddProductPage() {
             <input type="text" name="name" required onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md text-black" />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700">Category</label>
               <select name="category" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md text-black">
-                <option value="Tea & Spices">Tea & Spices</option>
-                <option value="Coconut Products">Coconut Products</option>
-                <option value="Clothing & Textiles">Clothing & Textiles</option>
-                <option value="Handicrafts">Handicrafts</option>
+                <option value="Tea & Spices">Tea & Spices (තේ සහ කුළුබඩු)</option>
+                <option value="Gems & Jewellery">Gems & Jewellery (මැණික් සහ ආභරණ)</option>
+                <option value="Coconut Products">Coconut Products (පොල් නිෂ්පාදන)</option>
+                <option value="Clothing & Textiles">Clothing & Textiles (ඇඳුම් සහ රෙදිපිළි)</option>
+                <option value="Handicrafts & Wooden">Handicrafts & Wooden (අත්කම් සහ ලී භාණ්ඩ)</option>
+                <option value="Food & Agriculture">Food & Agriculture (ආහාර සහ කෘෂිකර්ම)</option>
+                <option value="Seafood">Seafood (මුහුදු ආහාර)</option>
+                <option value="Ceramics & Homeware">Ceramics & Homeware (සෙරමික් සහ ගෘහ භාණ්ඩ)</option>
+                <option value="Rubber Products">Rubber Products (රබර් නිෂ්පාදන)</option>
+                <option value="Eco-friendly Products">Eco-friendly Products (පරිසර හිතකාමී)</option>
+                <option value="Electronics & Electrical">Electronics & Electrical (ඉලෙක්ට්‍රොනික උපකරණ)</option>
+                <option value="Plastic & Packaging">Plastic & Packaging (ප්ලාස්ටික් සහ ඇසුරුම්)</option>
+                <option value="Other">Other (වෙනත්)</option>
               </select>
             </div>
             <div>
@@ -79,10 +88,11 @@ export default function AddProductPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">MOQ (Minimum Order Qty) *</label>
-              <input type="text" name="moq" placeholder="e.g. 100 kg" required onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md text-black" />
+              {/* මෙතන තමයි MOQ උදාහරණය දාලා තියෙන්නේ */}
+              <label className="block text-sm font-medium text-gray-700">MOQ (උදා: 50 kg, 500 pieces, 1 container) *</label>
+              <input type="text" name="moq" placeholder="e.g. 100 kg / 500 units" required onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md text-black" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">Image URL *</label>
