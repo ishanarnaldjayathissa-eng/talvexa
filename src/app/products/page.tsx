@@ -33,7 +33,8 @@ export default async function ProductsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {products.map((product) => (
               <ProductCard 
-                key={product.id} 
+                key={product.id}
+                  id={product.id} // <--- මේක අලුතෙන් දාන්න ඕනේ
                 title={product.name} 
                 price={product.price} 
                 image={product.image_url || 'https://via.placeholder.com/300x300?text=No+Image'} 

@@ -2,10 +2,39 @@ import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import DeleteProductButton from '@/components/DeleteProductButton'
 export const dynamic = 'force-dynamic'
-
+import { redirect } from 'next/navigation'
 export default async function AdminDashboard() {
   const supabase = await createClient()
+  // 1. ලොග් වෙලා ඉන්න කෙනාව හොයාගන්න
+  const { data: { user } } = await supabase.auth.getUser()
 
+  // 2. ලොග් වෙලා නැත්නම් ලොගින් පිටුවට හරවා යවන්න
+  if (!user) {
+    redirect('/login')
+  }
+
+  // 3. ඔහු ඇඩ්මින් කෙනෙක්ද කියලා බලන්න
+    const { data: userRole, error: roleError } = await supabase
+    .from('user_roles')
+    .select('role')
+    .eq('id', user.id)
+    .single()
+
+  if (roleError) {
+    console.log("Role Error:", roleError.message)
+  }
+
+  // 4. ඇඩ්මින් කෙනෙක් නෙවෙයි නම් වෙනත් තැනකට යවන්න (හෝ අවහිර කරන්න)
+  if (userRole?.role !== 'admin') {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="bg-white p-8 rounded-lg shadow-md text-center">
+          <h1 className="text-2xl font-bold text-red-600 mb-4">Access Denied</h1>
+          <p className="text-gray-600">ඔයාට මේ පිටුවට එන්න අවසර නෑ. මේක ඇඩ්මින් ට විතරයි.</p>
+        </div>
+      </div>
+    )
+  }
   // Quotes ලබා ගැනීම
   const { data: quotes, error } = await supabase
     .from('quotes')
