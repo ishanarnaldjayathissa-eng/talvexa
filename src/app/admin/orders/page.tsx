@@ -93,6 +93,11 @@ export default async function AdminOrdersPage() {
                       
                       <td className="p-4">
                         <UpdateOrderStatus orderId={order.id} currentStatus={order.status} />
+                                               <div className="mt-2 text-center">
+                          <Link href={`/admin/orders/${order.id}/label`} className="text-blue-600 hover:underline text-xs font-bold">
+                            Print Label
+                          </Link>
+                        </div> 
                       </td>
                       
                     </tr>

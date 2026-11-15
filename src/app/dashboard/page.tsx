@@ -45,6 +45,7 @@ export default async function DashboardPage() {
                 <th className="py-2 text-sm text-gray-500">Order ID</th>
                 <th className="py-2 text-sm text-gray-500">Total</th>
                 <th className="py-2 text-sm text-gray-500">Status</th>
+                <th className="py-2 text-sm text-gray-500 text-right">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -57,6 +58,11 @@ export default async function DashboardPage() {
                     <span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-medium">
                       {order.status}
                     </span>
+                  </td>
+                   <td className="py-3 text-sm text-right">
+                    <Link href={`/dashboard/orders/${order.id}/invoice`} className="text-blue-600 hover:underline font-bold text-xs">
+                      View Invoice
+                    </Link>
                   </td>
                 </tr>
               ))}

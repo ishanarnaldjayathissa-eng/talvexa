@@ -92,25 +92,52 @@ export default async function AdminDashboard() {
               <thead>
                 <tr className="bg-gray-100 text-gray-600 text-xs uppercase tracking-wider border-b border-gray-200">
                   <th className="p-4 font-bold">Date</th>
-                  <th className="p-4 font-bold">Buyer Name</th>
+                  <th className="p-4 font-bold">Buyer Details</th>
                   <th className="p-4 font-bold">Product & Qty</th>
-                  <th className="p-4 font-bold">Contact</th>
+                  <th className="p-4 font-bold">Requirements</th>
                   <th className="p-4 font-bold">Destination</th>
+                  <th className="p-4 font-bold text-center">Action</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
                 {quotes && quotes.length > 0 ? (
                   quotes.map((quote) => (
-                    <tr key={quote.id} className="hover:bg-gray-50 transition">
+                    <tr key={quote.id} className="hover:bg-gray-50 transition align-top">
                       <td className="p-4 text-sm text-gray-500">{new Date(quote.created_at).toLocaleDateString()}</td>
-                      <td className="p-4 font-medium text-navy">{quote.buyer_name}</td>
-                      <td className="p-4 text-sm font-semibold text-gray-700">{quote.product} (Qty: {quote.quantity})</td>
-                      <td className="p-4 text-sm text-gray-600">{quote.email} <br/><span className="text-gray-400">{quote.whatsapp}</span></td>
+                      
+                      <td className="p-4">
+                        <p className="font-medium text-navy">{quote.buyer_name}</p>
+                        {quote.company_name && <p className="text-xs text-gray-500">{quote.company_name}</p>}
+                        <p className="text-sm text-gray-600 mt-1">{quote.email}</p>
+                        <p className="text-gray-400 text-xs">{quote.whatsapp}</p>
+                      </td>
+
+                      <td className="p-4">
+                        <p className="text-sm font-semibold text-gray-700">{quote.product_name || 'N/A'}</p>
+                        <p className="text-xs text-navy font-bold mt-1 bg-gold/10 inline-block px-2 py-1 rounded">Qty: {quote.required_quantity || 'N/A'}</p>
+                      </td>
+
+                      <td className="p-4 text-sm text-gray-600 max-w-xs">
+                        {quote.packaging_requirements && (
+                          <p><span className="font-semibold text-gray-800">Packaging:</span> {quote.packaging_requirements}</p>
+                        )}
+                        {quote.additional_message && (
+                          <p className="mt-1 text-xs italic text-gray-500 line-clamp-2">"{quote.additional_message}"</p>
+                        )}
+                      </td>
+
                       <td className="p-4 text-sm font-medium">{quote.country}</td>
+
+                      {/* අලුත් View බොත්තම මෙතන තමයි */}
+                      <td className="p-4 text-center">
+                        <Link href={`/admin/enquiries/${quote.id}`} className="bg-navy text-gold hover:bg-navy-light px-4 py-2 rounded text-xs font-bold transition inline-block shadow-sm">
+                          View Details
+                        </Link>
+                      </td>
                     </tr>
                   ))
                 ) : (
-                  <tr><td colSpan={5} className="p-8 text-center text-gray-400">No quote requests found.</td></tr>
+                  <tr><td colSpan={6} className="p-8 text-center text-gray-400">No quote requests found.</td></tr>
                 )}
               </tbody>
             </table>

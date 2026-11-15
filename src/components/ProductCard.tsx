@@ -1,56 +1,60 @@
-'use client'
-
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 
-export default function ProductCard({ id, title, price, image }: { id: string, title: string, price: number, image: string }) {
-  const router = useRouter()
+// අපිට අලුතෙන් moq එකයි category එකයි එනවා
+interface ProductCardProps {
+  id: string
+  title: string
+  price: number
+  image: string
+  moq?: string
+  category?: string
+}
 
-  const addToCart = (e: React.MouseEvent) => {
-    e.preventDefault() // මේකෙන් Link එකට යන එක නවත්තනවා
-    
-    const savedCart = localStorage.getItem('talvexa_cart')
-    let cart = savedCart ? JSON.parse(savedCart) : []
-
-    const existingItem = cart.find((item: any) => item.id === id)
-    
-    if (existingItem) {
-      existingItem.qty += 1 
-    } else {
-      cart.push({ id, title, price, qty: 1 })
-    }
-
-    localStorage.setItem('talvexa_cart', JSON.stringify(cart))
-    
-    alert('Item added to cart!')
-    router.push('/cart')
-  }
-
+export default function ProductCard({ id, title, price, image, moq, category }: ProductCardProps) {
   return (
-    <div className="bg-white rounded-md shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition group flex flex-col">
+    <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow group flex flex-col">
       
-      {/* පින්තූරය උඩ Click කරාම Details පිටුවට යනවා */}
-      <Link href={`/products/${id}`} className="block h-56 bg-gray-100 relative overflow-hidden">
+      {/* Image */}
+      <Link href={`/products/${id}`} className="relative h-56 w-full bg-gray-100 block overflow-hidden">
         <img 
           src={image} 
           alt={title} 
-          className="w-full h-full object-cover group-hover:scale-105 transition duration-500" 
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
       </Link>
 
-      <div className="p-5 flex-grow flex flex-col justify-between">
-        {/* අකුරු උඩ Click කරාමත් Details පිටුවට යනවා */}
-        <Link href={`/products/${id}`}>
-          <h3 className="text-lg font-bold text-navy mb-2 truncate hover:text-gold-dark transition">{title}</h3>
-        </Link>
+      {/* Details */}
+      <div className="p-4 flex flex-col flex-grow">
         
-        <div className="flex justify-between items-center mt-4">
-          <span className="text-xl font-extrabold text-gold-dark">${price.toFixed(2)}</span>
-          <button onClick={addToCart} className="border border-navy text-navy px-4 py-2 rounded-sm text-sm font-bold hover:bg-navy hover:text-gold transition">
-            Add to Cart
-          </button>
+        {/* Category */}
+        {category && (
+          <span className="text-xs font-bold text-gold uppercase tracking-wider mb-1">
+            {category}
+          </span>
+        )}
+
+        {/* Title */}
+        <Link href={`/products/${id}`}>
+          <h3 className="text-lg font-bold text-navy leading-tight mb-2 hover:text-gold transition-colors line-clamp-2">
+            {title}
+          </h3>
+        </Link>
+
+        {/* Bottom Area (Price & MOQ) */}
+        <div className="mt-auto pt-4 flex justify-between items-end border-t border-gray-100">
+          <div>
+            <p className="text-xs text-gray-400 mb-0.5">Est. Price</p>
+            <p className="text-xl font-extrabold text-navy">${price}</p>
+          </div>
+          
+          <div className="text-right">
+            <p className="text-xs text-gray-400 mb-0.5">MOQ</p>
+            <p className="text-sm font-semibold text-gray-700">{moq || "Contact Us"}</p>
+          </div>
         </div>
       </div>
+
     </div>
   )
 }
