@@ -128,10 +128,9 @@ export default async function AdminDashboard() {
 
                       <td className="p-4 text-sm font-medium">{quote.country}</td>
 
-                      {/* අලුත් View බොත්තම මෙතන තමයි */}
                       <td className="p-4 text-center">
-                        <Link href={`/admin/enquiries/${quote.id}`} className="bg-navy text-gold hover:bg-navy-light px-4 py-2 rounded text-xs font-bold transition inline-block shadow-sm">
-                          View Details
+                        <Link href={`/admin/enquiries/${quote.id}`} className="bg-navy text-gold hover:bg-navy-light px-3 py-1.5 rounded text-xs font-bold transition inline-block">
+                          View
                         </Link>
                       </td>
                     </tr>
