@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import PriceDisplay from './PriceDisplay' // 👈 අලුතෙන් එකතු කළා
 
 // අපිට අලුතෙන් moq එකයි category එකයි එනවා
 interface ProductCardProps {
@@ -45,7 +46,8 @@ export default function ProductCard({ id, title, price, image, moq, category }: 
         <div className="mt-auto pt-4 flex justify-between items-end border-t border-gray-100">
           <div>
             <p className="text-xs text-gray-400 mb-0.5">Est. Price</p>
-            <p className="text-xl font-extrabold text-navy">${price}</p>
+            {/* 👇 මෙතන අපි අලුත් PriceDisplay එක දැම්මා 👇 */}
+            <PriceDisplay price={price} className="text-xl font-extrabold text-navy" />
           </div>
           
           <div className="text-right">

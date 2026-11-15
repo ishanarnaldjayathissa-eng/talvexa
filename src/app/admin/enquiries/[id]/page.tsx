@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect, notFound } from 'next/navigation'
 import Link from 'next/link'
+import QuoteActions from './QuoteActions' // අලුත් බොත්තම් ටික Import කරගන්නවා
 
 export const dynamic = 'force-dynamic'
 
@@ -36,8 +37,8 @@ export default async function EnquiryDetailsPage({
             <h1 className="text-2xl font-extrabold tracking-widest text-gold">TALVEXA</h1>
             <span className="text-gray-300 text-sm border-l border-gray-600 pl-4">Quote Details</span>
           </div>
-          <Link href="/admin" className="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-md text-sm font-medium transition border border-white/20">
-            ← Back to Dashboard
+          <Link href="/admin/enquiries" className="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-md text-sm font-medium transition border border-white/20">
+            ← Back to Quotes
           </Link>
         </div>
       </header>
@@ -85,11 +86,11 @@ export default async function EnquiryDetailsPage({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <p className="text-sm text-gray-500">Product Name</p>
-                  <p className="font-semibold text-navy text-lg">{quote.product_name}</p>
+                  <p className="font-semibold text-navy text-lg">{quote.product_name || 'N/A'}</p>
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">Required Quantity</p>
-                  <p className="font-semibold text-navy text-lg bg-gold/10 inline-block px-3 py-1 rounded">{quote.required_quantity}</p>
+                  <p className="font-semibold text-navy text-lg bg-gold/10 inline-block px-3 py-1 rounded">{quote.required_quantity || 'N/A'}</p>
                 </div>
                 <div className="md:col-span-2">
                   <p className="text-sm text-gray-500">Packaging Requirements</p>
@@ -98,7 +99,7 @@ export default async function EnquiryDetailsPage({
               </div>
             </div>
 
-            {/* Message */}
+            {/* Message (මේක එක පාරයි තියෙන්නේ) */}
             <div>
               <h3 className="text-lg font-bold text-gold-dark border-b pb-2 mb-4">Additional Message</h3>
               <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
@@ -107,6 +108,10 @@ export default async function EnquiryDetailsPage({
                 </p>
               </div>
             </div>
+
+            {/* Action Buttons (Confirm / Delete) */}
+            <QuoteActions quoteId={quote.id} currentStatus={quote.status} />
+
           </div>
         </div>
       </div>

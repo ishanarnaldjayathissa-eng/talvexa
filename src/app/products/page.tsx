@@ -1,7 +1,7 @@
-import Navbar from '@/components/Navbar'
 import ProductCard from '@/components/ProductCard'
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
+// 👆 මෙතනින් import Navbar එක අයින් කළා
 
 export const dynamic = 'force-dynamic'
 
@@ -46,7 +46,7 @@ export default async function ProductsPage({
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      <Navbar />
+      {/* 👆 මෙතන තිබ්බ <Navbar /> එක අයින් කළා */}
       
       <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
         
